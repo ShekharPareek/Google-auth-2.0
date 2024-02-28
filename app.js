@@ -31,6 +31,7 @@ function oauthSignIn() {
 }
 
 document.querySelector(".profile-view").style.display = "block";
+document.querySelector(".user-req").style.display = "none"
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g;
 let m;
@@ -84,6 +85,7 @@ function signOut() {
         if (response.ok) {
             localStorage.removeItem('authInfo'); 
            document.querySelector(".profile-view").style.display = "none";
+           document.querySelector(".user-req").style.display = "block"
         }
     })
     .catch((error) => {
