@@ -32,7 +32,6 @@ function oauthSignIn() {
 }
 
 document.querySelector(".profile-view").style.display = "block";
-document.querySelector(".user-req").style.display = "none"
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g;
 let m;
