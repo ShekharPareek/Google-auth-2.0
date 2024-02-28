@@ -31,7 +31,7 @@ function oauthSignIn() {
     form.submit();
 }
 
-document.querySelector(".profile-view").style.display = "block";
+
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g;
 let m;
@@ -58,6 +58,7 @@ if (info && info.access_token) {
     .then((data) => data.json())
     .then((info) => {
         console.log(info);
+        document.querySelector(".profile-view").style.display = "block";
         document.getElementById("userName").innerHTML += info.name;
         document.getElementById("userImage").setAttribute('src', info.picture);
 
