@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth2.0</title>
-   
+   <style>
+    .profile-view{
+        display:none;
+    }
+   </style>
 </head>
 <body>
-    <div class="container">
+    <div style="padding:50px; text-align: center;" class="container">
          <div>
-            <h3>Google Signin </h3>
+            <h3>Welcome to the Sign-In Page</h3>
             <button style="padding:10px; background-color: dodgerblue; color:aliceblue; border:none; cursor: pointer; border-radius:17px;" onclick="oauthSignIn()">
                 Sign in to Google
             </button>
          </div>
+    </div>
+    <div class="container profile-view">
+        <h1 style="text-align: center;">Welcome to the User profile page</h1>
+    <div style="margin-top:30px;" id="userDetails">
+      <div style="background-color:dodgerblue; display: inline-block; border-radius:8px; overflow: hidden;"><img  id="userImage"></div>
+        <h2>Your full Name : <span id="userName"></span></h2>
+    </div>
+    <div><button style="padding:10px; background-color: dodgerblue; color:aliceblue; border:none; cursor: pointer; border-radius:17px;" onclick="signOut()">Logout</button></div>
     </div>
 </body>
 <script src="./app.js"></script>
