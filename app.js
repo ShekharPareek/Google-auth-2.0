@@ -58,6 +58,7 @@ if (info && info.access_token) {
     .then((data) => data.json())
     .then((info) => {
         console.log(info);
+        document.querySelector(".user-req").style.display = "none";
         document.querySelector(".profile-view").style.display = "block";
         document.getElementById("userName").innerHTML += info.name;
         document.getElementById("userImage").setAttribute('src', info.picture);
