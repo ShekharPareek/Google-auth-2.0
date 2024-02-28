@@ -1,5 +1,6 @@
 function oauthSignIn() {
     // Google's OAuth 2.0 endpoint for requesting an access token
+    document.querySelector(".profile-view").style.display = "none";
     var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   
     var form = document.createElement('form');
