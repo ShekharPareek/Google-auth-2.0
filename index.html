@@ -14,32 +14,8 @@
                 Sign in to Google
             </button>
          </div>
-         <div id="userDetails"></div>
     </div>
 </body>
 <script src="./app.js"></script>
-<script>
-    // Function to extract information from URL parameters
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    };
 
-    // Extracting user details from URL parameters
-    var accessToken = getUrlParameter('ya29.a0AfB_byAFdKvyI7bdl-k4Inmxux4-ONzFp9cifswzB0q0iSwW89O1io6RHQkdORdpuZ3IUSplzlaXwB2y9ptrZxh8ryuDrUwvgAQx-WvJEuwUsRnylJX4hjcv-xRWcdNDr4dRWb8yGPxSfSfD_u_2Gd-lKq8BnBnn8AaCgYKAZYSARASFQHGX2MiZS9AbOQTT8E3T57AOTeSkg0169');
-    var tokenType = getUrlParameter('Bearer');
-    var expiresIn = getUrlParameter('3599');
-    var scope = getUrlParameter('https://www.googleapis.com/auth/cloud-platform.read-only');
-
-    // Displaying user details on the webpage
-    var userDetailsDiv = document.getElementById('userDetails');
-    userDetailsDiv.innerHTML = `
-        <p>Access Token: ${accessToken}</p>
-        <p>Token Type: ${tokenType}</p>
-        <p>Expires In: ${expiresIn} seconds</p>
-        <p>Scope: ${scope}</p>
-    `;
-</script>
 </html>

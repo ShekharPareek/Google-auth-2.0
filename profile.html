@@ -5,32 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1>Welcome to the User proifle page</h1>
+<body style="padding: 50px 0 0 50px;">
+    <h1 style="text-align: center;">Welcome to the User profile page</h1>
+    <div style="margin-top:30px;" id="userDetails">
+      <div style="background-color:dodgerblue; display: inline-block; border-radius:8px; overflow: hidden;"><img  id="userImage"></div>
+        <h2>Your full Name : <span id="userName"></span></h2>
+    </div>
+    <div><button style="padding:10px; background-color: dodgerblue; color:aliceblue; border:none; cursor: pointer; border-radius:17px;" onclick="signOut()">Logout</button></div>
 </body>
+<script>
+let params = {};
+let regex = /([^&=]+)=([^&]*)/g;
+let m;
 
-    <script>
-        // Function to extract information from URL parameters
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
+while (m = regex.exec(location.href)) {
+    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+}
 
-        // Extracting user details from URL parameters
-        var accessToken = getUrlParameter('ya29.a0AfB_byAFdKvyI7bdl-k4Inmxux4-ONzFp9cifswzB0q0iSwW89O1io6RHQkdORdpuZ3IUSplzlaXwB2y9ptrZxh8ryuDrUwvgAQx-WvJEuwUsRnylJX4hjcv-xRWcdNDr4dRWb8yGPxSfSfD_u_2Gd-lKq8BnBnn8AaCgYKAZYSARASFQHGX2MiZS9AbOQTT8E3T57AOTeSkg0169');
-        var tokenType = getUrlParameter('Bearer');
-        var expiresIn = getUrlParameter('3599');
-        var scope = getUrlParameter('https://www.googleapis.com/auth/cloud-platform.read-only');
+if (Object.keys(params).length > 0) {
+    localStorage.setItem('authInfo', JSON.stringify(params));
+}
 
-        // Displaying user details on the webpage
-        var userDetailsDiv = document.getElementById('userDetails');
-        userDetailsDiv.innerHTML = `
-            <p>Access Token: ${accessToken}</p>
-            <p>Token Type: ${tokenType}</p>
-            <p>Expires In: ${expiresIn} seconds</p>
-            <p>Scope: ${scope}</p>
-        `;
+window.history.pushState({}, document.title, "/" + "profile.html");
+
+let info = JSON.parse(localStorage.getItem('authInfo'));
+console.log(info);
+
+if (info && info.access_token) {
+    fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: {
+            "Authorization": `Bearer ${info.access_token}`
+        }
+    })
+    .then((data) => data.json())
+    .then((info) => {
+        console.log(info);
+        document.getElementById("userName").innerHTML += info.name;
+        document.getElementById("userImage").setAttribute('src', info.picture);
+
+    })
+    .catch((error) => {
+        console.error('Error fetching user info:', error);
+    });
+} else {
+    console.error('No access token found in authInfo');
+}
+
+
+
+
+
+
+  function signOut() {
+    fetch('https://www.googleapis.com/revoke?token='+ info['acces_token'], {
+        
+            method: `post`,
+            headers:{
+                "content-type" :"application/x-wwwform-urlencoded"
+                }
+          })
+
+            .then((response) => {
+              if(response.ok){
+              console.log("successfully logout")
+              window.location.href = "http://127.0.0.1:3000/profile.html";
+          }
+            })
+            .catch((error)=>{
+                console.log("error occured :"+error);
+            })
+          }
+
+
+
 </script>
 </html>
