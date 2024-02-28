@@ -12,7 +12,7 @@ function oauthSignIn() {
         'client_id': '1085249692225-g6f6fuib5k81c89pav60mhc7hl6pfit2.apps.googleusercontent.com',
         'redirect_uri': 'https://google-auth-2-0-alpha.vercel.app/', // Update this with your actual redirect URI
         'response_type': 'token',
-        'scope': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube.readonly',
+        'scope': 'https://www.googleapis.com/auth/userinfo.profile',
         'include_granted_scopes': 'true',
         'state': 'pass-through value'
     };
@@ -44,7 +44,7 @@ if (Object.keys(params).length > 0) {
     localStorage.setItem('authInfo', JSON.stringify(params));
 }
 
-window.history.pushState({}, document.title, "/" + "profile.html");
+window.history.pushState({}, document.title, "/" + "index.html");
 
 let info = JSON.parse(localStorage.getItem('authInfo'));
 console.log(info);
