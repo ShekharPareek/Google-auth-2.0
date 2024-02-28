@@ -1,5 +1,4 @@
 function oauthSignIn() {
-  document.querySelector(".profile-view").style.display = "block";
     // Google's OAuth 2.0 endpoint for requesting an access token
     var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   
@@ -31,7 +30,7 @@ function oauthSignIn() {
     form.submit();
 }
 
-
+document.querySelector(".profile-view").style.display = "block";
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g;
 let m;
